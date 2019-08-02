@@ -8,7 +8,7 @@ public class ItemScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class ItemScript : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.position = new Vector3(Round(mousePos.x), Round(mousePos.y), -9);
+        transform.position = new Vector3(Round(mousePos.x), Round(mousePos.y));
     }
 
     private float Round(float input)

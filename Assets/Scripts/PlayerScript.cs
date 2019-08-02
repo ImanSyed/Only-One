@@ -3,12 +3,17 @@
 public class PlayerScript : MonoBehaviour
 {
 
-    public CharacterController2D controller;
+    CharacterController2D controller;
 
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
     bool jump = false;
+
+    private void Awake()
+    {
+        controller = GetComponent<CharacterController2D>();
+    }
 
     // Update is called once per frame
     void Update()
