@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class CameraScript : MonoBehaviour
+public class GasParticle : MonoBehaviour
 {
     [SerializeField]
     float speed;
@@ -14,7 +16,7 @@ public class CameraScript : MonoBehaviour
 
         Vector3 pos = transform.position;
         pos.x = Mathf.Lerp(transform.position.x, target.position.x, interpolation);
-        pos.y = Mathf.Lerp(transform.position.y, target.position.y - 1f, interpolation);
+        pos.y = Mathf.Lerp(transform.position.y, target.position.y, interpolation);
         transform.position = pos;
     }
 }
