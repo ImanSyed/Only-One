@@ -68,16 +68,18 @@ public class CharacterController2D : MonoBehaviour
                 // And then smoothing it out and applying it to the character
                 m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
-                if (FindObjectOfType<ItemScript>().lockValue == 0.25f && FindObjectOfType<ItemScript>().transform.position.y > transform.position.y)
+                if (FindObjectOfType<ItemScript>().snapValue == 1.25f && FindObjectOfType<ItemScript>().transform.position.y > transform.position.y)
                 {
+                    FindObjectOfType<ItemScript>().snapValue = 2f;
                     FindObjectOfType<ItemScript>().lockValue = 0.05f;
                 }
             }
             else
             {
-                if (FindObjectOfType<ItemScript>().lockValue == 0.05f)
+                if (FindObjectOfType<ItemScript>().snapValue == 2f)
                 {
-                    FindObjectOfType<ItemScript>().lockValue = 0.25f;
+                    FindObjectOfType<ItemScript>().lockValue = 0.05f;
+                    FindObjectOfType<ItemScript>().snapValue = 1.25f;
                 }
 
                 // Move the character by finding the target velocity

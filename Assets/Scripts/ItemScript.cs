@@ -2,14 +2,12 @@
 
 public class ItemScript : MonoBehaviour
 {
-    [SerializeField]
-    float snapValue = 1;
+    public float snapValue = 1;
 
     bool axis, locked;
 
     Vector2 startPos;
 
-    [HideInInspector]
     public float lockValue = 0.25f;
 
     // Start is called before the first frame update
@@ -32,7 +30,7 @@ public class ItemScript : MonoBehaviour
 
         if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            if(Vector2.Distance(startPos, Input.mousePosition) > 20f)
+            if(Vector2.Distance(startPos, Input.mousePosition) >= 2f)
             {
                 Invoke("Unlock", lockValue);
             }
@@ -42,27 +40,27 @@ public class ItemScript : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse X") > 10000)
             {
-                transform.Translate(Vector2.right * 2);
+                transform.Translate(Vector2.right * snapValue * 2);
                 locked = true;
                 CancelInvoke();
             }
             if (Input.GetAxisRaw("Mouse X") < -10000)
             {
-                transform.Translate(Vector2.left * 2);
+                transform.Translate(Vector2.left * snapValue * 2);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") > 10000)
             {
-                transform.Translate(Vector2.up * 2);
+                transform.Translate(Vector2.up * snapValue);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                transform.Translate(Vector2.down * 2);
+                transform.Translate(Vector2.down * snapValue);
                 locked = true;
                 CancelInvoke();
 
@@ -90,7 +88,7 @@ public class ItemScript : MonoBehaviour
         }
         if (!axis)
         {
-            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.x < 4f)
+            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.x < 4.5f)
             {
                 Vector3 scale = transform.localScale;
                 scale.x += 0.25f;
@@ -105,7 +103,7 @@ public class ItemScript : MonoBehaviour
         }
         else
         {
-            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.y < 4f)
+            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.y < 4.5f)
             {
                 Vector3 scale = transform.localScale;
                 scale.y += 0.25f;
