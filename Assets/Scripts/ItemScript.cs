@@ -138,5 +138,13 @@ public class ItemScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    } 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy") && !collision.gameObject.GetComponent<EnemyScript>().infected)
+        {
+            collision.gameObject.GetComponent<EnemyScript>().infected = true;
+        }
+    }
 }

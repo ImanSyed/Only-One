@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1387301049}
   - component: {fileID: 1387301048}
   - component: {fileID: 6056207126626262435}
+  - component: {fileID: 1286568426112471389}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -170,3 +171,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1286568426112471389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292373531230811534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e768d6112db216488a4ba8dc5bbd521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
