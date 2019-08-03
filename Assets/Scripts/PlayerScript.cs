@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
 
+    [SerializeField]
+    float health = 5;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
@@ -31,9 +34,26 @@ public class PlayerScript : MonoBehaviour
     {
         if (controller)
         {
+            if(horizontalMove != 0 && !GetComponent<Animator>().GetBool("Walking"))
+            {
+                GetComponent<Animator>().SetBool("Walking", true);
+            }
+            else
+            {
+                GetComponent<Animator>().SetBool("Walking", false);
+            }
             // Move our character
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
             jump = false;
+        }
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

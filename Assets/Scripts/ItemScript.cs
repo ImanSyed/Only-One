@@ -10,6 +10,8 @@ public class ItemScript : MonoBehaviour
 
     public float lockValue = 0.25f;
 
+    public ParticleSystem gasParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,12 +95,18 @@ public class ItemScript : MonoBehaviour
                 Vector3 scale = transform.localScale;
                 scale.x += 0.25f;
                 transform.localScale = scale;
+                Vector3 gasScale = gasParticle.shape.scale;
+                gasScale.x += 0.25f;
+                gasParticle.transform.localScale = gasScale;
             }
             else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.x > 0.5f)
             {
                 Vector3 scale = transform.localScale;
                 scale.x -= 0.25f;
                 transform.localScale = scale;
+                Vector3 gasScale = gasParticle.shape.scale;
+                gasScale.x -= 0.25f;
+                gasParticle.transform.localScale = gasScale;
             }
         }
         else
@@ -108,13 +116,27 @@ public class ItemScript : MonoBehaviour
                 Vector3 scale = transform.localScale;
                 scale.y += 0.25f;
                 transform.localScale = scale;
+                Vector3 gasScale = gasParticle.shape.scale;
+                gasScale.y += 0.25f;
+                gasParticle.transform.localScale = gasScale;
             }
             else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.y > 0.5f)
             {
                 Vector3 scale = transform.localScale;
                 scale.y -= 0.25f;
                 transform.localScale = scale;
+                Vector3 gasScale = gasParticle.shape.scale;
+                gasScale.y -= 0.25f;
+                gasParticle.transform.localScale = gasScale;
             }
         }
     }
+
+    public void TakeDamage(float dmg)
+    {
+        if(dmg >= 100)
+        {
+            Destroy(gameObject);
+        }
+    } 
 }
