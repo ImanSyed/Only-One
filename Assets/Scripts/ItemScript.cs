@@ -5,28 +5,81 @@ public class ItemScript : MonoBehaviour
     [SerializeField]
     float snapValue = 1;
 
-    bool axis;
+    bool axis, locked;
+
+    Vector2 startPos;
+
+    [HideInInspector]
+    public float lockValue = 0.25f;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
+        startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        /*  
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         transform.position = new Vector3(Round(mousePos.x), Round(mousePos.y));
+        */
 
+        if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        {
+            if(Vector2.Distance(startPos, Input.mousePosition) > 20f)
+            {
+                Invoke("Unlock", lockValue);
+            }
+        }
+
+        if (!locked)
+        {
+            if (Input.GetAxisRaw("Mouse X") > 10000)
+            {
+                transform.Translate(Vector2.right * 2);
+                locked = true;
+                CancelInvoke();
+            }
+            if (Input.GetAxisRaw("Mouse X") < -10000)
+            {
+                transform.Translate(Vector2.left * 2);
+                locked = true;
+                CancelInvoke();
+
+            }
+            if (Input.GetAxisRaw("Mouse Y") > 10000)
+            {
+                transform.Translate(Vector2.up * 2);
+                locked = true;
+                CancelInvoke();
+
+            }
+            if (Input.GetAxisRaw("Mouse Y") < -10000)
+            {
+                transform.Translate(Vector2.down * 2);
+                locked = true;
+                CancelInvoke();
+
+            }
+        }
         Manipulation();
     }
 
-    private float Round(float input)
+    /*private float Round(float input)
     {
         return (snapValue * Mathf.Round(input / snapValue) + 0.5f);
+    }*/
+
+    void Unlock()
+    {
+        locked = false;
+        startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void Manipulation()
