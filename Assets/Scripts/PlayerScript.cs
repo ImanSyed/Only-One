@@ -29,8 +29,11 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-        jump = false;
+        if (controller)
+        {
+            // Move our character
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+            jump = false;
+        }
     }
 }

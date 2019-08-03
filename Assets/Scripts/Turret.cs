@@ -6,10 +6,9 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     [SerializeField] Transform targetPlayer;
-    [SerializeField] Transform objectToPan;
     public GameObject [] missle;
     public GameObject missleEmiiter;
-    [SerializeField]  float misslespeed = -15.0f;
+    [SerializeField]  float misslespeed = 15.0f;
     [SerializeField] float timeDestroyed = 1.0f;
     [SerializeField] float bulletInterval = 1.0f;
     GameObject TempBullet;
@@ -23,14 +22,24 @@ public class Turret : MonoBehaviour
        StartCoroutine(ShootProjectille());
     }
 
-     IEnumerator ShootProjectille()
+    private void Update()
+    {
+        Vector2 targetPos = targetPlayer.position;
+        Vector2 thisPos = transform.position;
+        targetPos.x = targetPos.x - thisPos.x;
+        targetPos.y = targetPos.y - thisPos.y;
+        float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+    
+    IEnumerator ShootProjectille()
     {
         while (true)
         {
-            TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, missleEmiiter.transform.rotation);
-            TempRigid = TempBullet.GetComponent<Rigidbody2D>();
-            TempRigid.AddForce(Vector2.right * misslespeed);
             yield return new WaitForSeconds(bulletInterval);
+            TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, transform.rotation);
+            TempRigid = TempBullet.GetComponent<Rigidbody2D>();
+            TempRigid.AddForce(transform.right * misslespeed);
             Destroy(TempBullet, timeDestroyed);
         }
 
