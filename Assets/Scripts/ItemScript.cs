@@ -62,7 +62,7 @@ public class ItemScript : MonoBehaviour
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                if (transform.position.y < FindObjectOfType<PlayerScript>().gameObject.transform.position.y)
+                if (FindObjectOfType<PlayerScript>() && transform.position.y < FindObjectOfType<PlayerScript>().gameObject.transform.position.y)
                 {
                     transform.Translate(Vector2.down / 5f);
                 }
