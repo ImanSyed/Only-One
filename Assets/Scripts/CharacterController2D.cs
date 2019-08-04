@@ -14,6 +14,7 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+    private short doubleJump = 0;
 
 	[Header("Events")]
 	[Space]
@@ -71,15 +72,19 @@ public class CharacterController2D : MonoBehaviour
                 if (FindObjectOfType<ItemScript>().snapValue == 1.25f && FindObjectOfType<ItemScript>().transform.position.y > transform.position.y)
                 {
                     FindObjectOfType<ItemScript>().snapValue = 2f;
-                    FindObjectOfType<ItemScript>().lockValue = 0.05f;
+                    FindObjectOfType<ItemScript>().lockValue = 0.0f;
                 }
             }
             else
             {
                 if (FindObjectOfType<ItemScript>().snapValue == 2f)
                 {
-                    FindObjectOfType<ItemScript>().lockValue = 0.05f;
+                    FindObjectOfType<ItemScript>().lockValue = 0.0f;
                     FindObjectOfType<ItemScript>().snapValue = 1.25f;
+                }
+                if(doubleJump > 0)
+                {
+                    doubleJump = 0;
                 }
 
                 // Move the character by finding the target velocity
@@ -101,11 +106,12 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+		if (doubleJump < 2 && jump)
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            doubleJump++;
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / doubleJump));
 		}
 	}
 

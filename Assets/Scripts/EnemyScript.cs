@@ -8,7 +8,13 @@ public class EnemyScript : MonoBehaviour
     {
         if(infected && GetComponent<SpriteRenderer>().color != Color.green)
         {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, Color.green, 0.1f);
+            Invoke("Destroy", 2f);
+            GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, Color.green, 0.01f);
         }
+    }
+
+    void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

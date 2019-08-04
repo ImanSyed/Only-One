@@ -42,27 +42,27 @@ public class ItemScript : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse X") > 10000)
             {
-                transform.Translate(Vector2.right * snapValue * 2);
+                transform.Translate(Vector2.right);
                 locked = true;
                 CancelInvoke();
             }
             if (Input.GetAxisRaw("Mouse X") < -10000)
             {
-                transform.Translate(Vector2.left * snapValue * 2);
+                transform.Translate(Vector2.left);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") > 10000)
             {
-                transform.Translate(Vector2.up * snapValue);
+                transform.Translate(Vector2.up);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                transform.Translate(Vector2.down * snapValue);
+                transform.Translate(Vector2.down);
                 locked = true;
                 CancelInvoke();
 
@@ -98,6 +98,9 @@ public class ItemScript : MonoBehaviour
                 Vector3 gasScale = gasParticle.shape.scale;
                 gasScale.x += 0.25f;
                 gasParticle.transform.localScale = gasScale;
+                var em = gasParticle.emission;
+                float t = em.rateOverTime.constant + 1;
+                em.rateOverTime = t;
             }
             else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.x > 0.5f)
             {
@@ -107,6 +110,10 @@ public class ItemScript : MonoBehaviour
                 Vector3 gasScale = gasParticle.shape.scale;
                 gasScale.x -= 0.25f;
                 gasParticle.transform.localScale = gasScale;
+                var em = gasParticle.emission;
+                float t = em.rateOverTime.constant - 1;
+                if(t > 2)
+                    em.rateOverTime = t;
             }
         }
         else
@@ -119,6 +126,9 @@ public class ItemScript : MonoBehaviour
                 Vector3 gasScale = gasParticle.shape.scale;
                 gasScale.y += 0.25f;
                 gasParticle.transform.localScale = gasScale;
+                var em = gasParticle.emission;
+                float t = em.rateOverTime.constant + 1;
+                em.rateOverTime = t;
             }
             else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.y > 0.5f)
             {
@@ -128,6 +138,10 @@ public class ItemScript : MonoBehaviour
                 Vector3 gasScale = gasParticle.shape.scale;
                 gasScale.y -= 0.25f;
                 gasParticle.transform.localScale = gasScale;
+                var em = gasParticle.emission;
+                float t = em.rateOverTime.constant - 1;
+                if (t > 2)
+                    em.rateOverTime = t;
             }
         }
     }
