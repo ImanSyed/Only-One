@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
@@ -33,6 +31,10 @@ public class EnemyFollow : MonoBehaviour
         if (collision.CompareTag("Player") && !follow)
         {
             follow = true;
+            if (GetComponentInChildren<Turret>())
+            {
+                GetComponentInChildren<Turret>().enabled = true;
+            }
         }
     }
 }

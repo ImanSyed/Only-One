@@ -24,5 +24,13 @@ public class DamageScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (collision.gameObject.GetComponent<EnemyScript>())
+        {
+            collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+            if (bullet)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

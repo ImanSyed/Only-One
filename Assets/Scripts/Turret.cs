@@ -44,10 +44,13 @@ public class Turret : MonoBehaviour
         while (shoot)
         {
             yield return new WaitForSeconds(bulletInterval);
-            TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, transform.rotation);
-            TempRigid = TempBullet.GetComponent<Rigidbody2D>();
-            TempRigid.AddForce(transform.right * misslespeed);
-            Destroy(TempBullet, timeDestroyed);
+            if (shoot)
+            {
+                TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, transform.rotation);
+                TempRigid = TempBullet.GetComponent<Rigidbody2D>();
+                TempRigid.AddForce(transform.right * misslespeed);
+                Destroy(TempBullet, timeDestroyed);
+            }
         }
 
     }

@@ -12,7 +12,8 @@ public class EnemyScript : MonoBehaviour
     {
         if(infected && GetComponent<SpriteRenderer>().color != Color.green)
         {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, Color.green, 0.01f);
+            infected = false;
+            GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, Color.green, 0.15f);
             if (GetComponent<ForcefieldGenerator>())
             {
                 StartCoroutine(GetComponent<ForcefieldGenerator>().PowerDown());
@@ -31,5 +32,13 @@ public class EnemyScript : MonoBehaviour
             Instantiate(explosionEffect, transform.position, transform.rotation);
         }
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        if (dmg >= 100)
+        {
+            Destroy();
+        }
     }
 }

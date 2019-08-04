@@ -157,13 +157,17 @@ public class ItemScript : MonoBehaviour
     {
         if(dmg >= 100)
         {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            var em = gasParticle.emission;
+            em.rateOverTime = 0;
             Destroy(this);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<EnemyScript>() && !collision.gameObject.GetComponent<EnemyScript>().infected)
+        if (collision.GetComponent<EnemyScript>() && !collision.gameObject.GetComponent<EnemyScript>().infected && !collision.isTrigger)
         {
             collision.gameObject.GetComponent<EnemyScript>().infected = true;
         }
