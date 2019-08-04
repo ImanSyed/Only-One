@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     float health = 5;
 
+    EnemyTypes playerItem;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
