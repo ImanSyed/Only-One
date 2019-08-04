@@ -370,6 +370,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6799815600077258611, guid: 32b5b6ab9c97fa54e8f8f9a92fa9a9e4,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799815600077258614, guid: 32b5b6ab9c97fa54e8f8f9a92fa9a9e4,
+        type: 3}
+      propertyPath: m_JumpForce
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b5b6ab9c97fa54e8f8f9a92fa9a9e4, type: 3}
 --- !u!1001 &7756882385718624721
@@ -439,10 +449,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4176468703861767707, guid: 3ce93689a3b234942a2d471edf3702f6,
+    - target: {fileID: 7756882385731435810, guid: 3ce93689a3b234942a2d471edf3702f6,
         type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 7
+      propertyPath: lockValue
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce93689a3b234942a2d471edf3702f6, type: 3}
