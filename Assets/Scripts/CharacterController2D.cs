@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -8,13 +9,15 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
+    [SerializeField] float fallMultiplier = 2.5f;
+    [SerializeField] float lowJumpMultiplier = 2f;
 
-	const float k_GroundedRadius = 0.025f; // Radius of the overlap circle to determine if grounded
+
+    const float k_GroundedRadius = 0.1f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-    private short doubleJump;
 
 	[Header("Events")]
 	[Space]
@@ -27,9 +30,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
-        doubleJump = 0;
-
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -49,17 +50,22 @@ public class CharacterController2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-
+               
                 if (!wasGrounded)
                 {
                     OnLandEvent.Invoke();
-                    if (doubleJump == 2)
-                    {
-                        doubleJump = 0;
-                    }
                 }
             }
 		}
+
+        if(m_Rigidbody2D.velocity.y < 0)
+        {
+            m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if(m_Rigidbody2D.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
 	}
 
 
@@ -112,23 +118,12 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (doubleJump < 2 && jump)
+		if (m_Grounded && jump)
 		{
-			// Add a vertical force to the player.
-			m_Grounded = false;
-            doubleJump++;
-            if (doubleJump == 1)
-            {
-               m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            }
-            else
-            {
-                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y / 2);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 2f));
-            }
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            m_Grounded = false;
         }
 	}
-
 
 	private void Flip()
 	{

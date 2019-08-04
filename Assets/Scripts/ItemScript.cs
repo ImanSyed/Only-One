@@ -32,7 +32,7 @@ public class ItemScript : MonoBehaviour
 
         if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            if(Vector2.Distance(startPos, Input.mousePosition) >= 2f)
+            if(Vector2.Distance(startPos, Input.mousePosition) >= 1.5f)
             {
                 Invoke("Unlock", lockValue);
             }
@@ -42,27 +42,27 @@ public class ItemScript : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse X") > 10000)
             {
-                transform.Translate(Vector2.right);
+                transform.Translate(Vector2.right / 1.5f);
                 locked = true;
                 CancelInvoke();
             }
             if (Input.GetAxisRaw("Mouse X") < -10000)
             {
-                transform.Translate(Vector2.left);
+                transform.Translate(Vector2.left / 1.5f);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") > 10000)
             {
-                transform.Translate(Vector2.up);
+                transform.Translate(Vector2.up / 1.5f);
                 locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                transform.Translate(Vector2.down);
+                transform.Translate(Vector2.down / 1.5f);
                 locked = true;
                 CancelInvoke();
 
@@ -90,7 +90,7 @@ public class ItemScript : MonoBehaviour
         }
         if (!axis)
         {
-            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.x < 4.5f)
+            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.x < 4.75f)
             {
                 Vector3 scale = transform.localScale;
                 scale.x += 0.25f;
@@ -102,7 +102,7 @@ public class ItemScript : MonoBehaviour
                 float t = em.rateOverTime.constant + 1;
                 em.rateOverTime = t;
             }
-            else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.x > 0.5f)
+            else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.x > 0.25f)
             {
                 Vector3 scale = transform.localScale;
                 scale.x -= 0.25f;
@@ -118,7 +118,7 @@ public class ItemScript : MonoBehaviour
         }
         else
         {
-            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.y < 4.5f)
+            if (Input.GetAxisRaw("Size") > 0 && transform.localScale.y < 4.75f)
             {
                 Vector3 scale = transform.localScale;
                 scale.y += 0.25f;
@@ -130,7 +130,7 @@ public class ItemScript : MonoBehaviour
                 float t = em.rateOverTime.constant + 1;
                 em.rateOverTime = t;
             }
-            else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.y > 0.5f)
+            else if (Input.GetAxisRaw("Size") < 0 && transform.localScale.y > 0.25f)
             {
                 Vector3 scale = transform.localScale;
                 scale.y -= 0.25f;
@@ -150,7 +150,7 @@ public class ItemScript : MonoBehaviour
     {
         if(dmg >= 100)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 

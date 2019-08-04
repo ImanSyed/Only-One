@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CameraScript : MonoBehaviour
 {
@@ -19,5 +21,10 @@ public class CameraScript : MonoBehaviour
             pos.y = Mathf.Lerp(transform.position.y, target.position.y - 1f, interpolation);
             transform.position = pos;
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
+
 }
