@@ -10,11 +10,14 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        float interpolation = speed * Time.deltaTime;
+        if (target)
+        {
+            float interpolation = speed * Time.deltaTime;
 
-        Vector3 pos = transform.position;
-        pos.x = Mathf.Lerp(transform.position.x, target.position.x, interpolation);
-        pos.y = Mathf.Lerp(transform.position.y, target.position.y - 1f, interpolation);
-        transform.position = pos;
+            Vector3 pos = transform.position;
+            pos.x = Mathf.Lerp(transform.position.x, target.position.x, interpolation);
+            pos.y = Mathf.Lerp(transform.position.y, target.position.y - 1f, interpolation);
+            transform.position = pos;
+        }
     }
 }

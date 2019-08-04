@@ -9,12 +9,12 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	const float k_GroundedRadius = 0.025f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-    private short doubleJump = 0;
+    private short doubleJump;
 
 	[Header("Events")]
 	[Space]
@@ -27,6 +27,8 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
+        doubleJump = 0;
+
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)
@@ -47,9 +49,16 @@ public class CharacterController2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-				if (!wasGrounded)
-					OnLandEvent.Invoke();
-			}
+
+                if (!wasGrounded)
+                {
+                    OnLandEvent.Invoke();
+                    if (doubleJump == 2)
+                    {
+                        doubleJump = 0;
+                    }
+                }
+            }
 		}
 	}
 
@@ -69,23 +78,20 @@ public class CharacterController2D : MonoBehaviour
                 // And then smoothing it out and applying it to the character
                 m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
-                if (FindObjectOfType<ItemScript>().snapValue == 1.25f && FindObjectOfType<ItemScript>().transform.position.y > transform.position.y)
+                /*if (FindObjectOfType<ItemScript>().snapValue == 1.25f && FindObjectOfType<ItemScript>().transform.position.y > transform.position.y)
                 {
                     FindObjectOfType<ItemScript>().snapValue = 2f;
                     FindObjectOfType<ItemScript>().lockValue = 0.0f;
-                }
+                }*/
             }
             else
             {
-                if (FindObjectOfType<ItemScript>().snapValue == 2f)
+                /*if (FindObjectOfType<ItemScript>().snapValue == 2f)
                 {
                     FindObjectOfType<ItemScript>().lockValue = 0.0f;
                     FindObjectOfType<ItemScript>().snapValue = 1.25f;
-                }
-                if(doubleJump > 0)
-                {
-                    doubleJump = 0;
-                }
+                }*/
+
 
                 // Move the character by finding the target velocity
                 Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
@@ -111,8 +117,16 @@ public class CharacterController2D : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
             doubleJump++;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / doubleJump));
-		}
+            if (doubleJump == 1)
+            {
+               m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            }
+            else
+            {
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y / 2);
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 2f));
+            }
+        }
 	}
 
 

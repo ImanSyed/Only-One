@@ -156,7 +156,7 @@ public class ItemScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && !collision.gameObject.GetComponent<EnemyScript>().infected)
+        if (collision.GetComponent<EnemyScript>() && !collision.gameObject.GetComponent<EnemyScript>().infected)
         {
             collision.gameObject.GetComponent<EnemyScript>().infected = true;
         }
