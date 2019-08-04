@@ -11,10 +11,18 @@ public class ItemScript : MonoBehaviour
     public float lockValue = 0.25f;
 
     public ParticleSystem gasParticle;
+    public Material gasMat;
+    [SerializeField]
+    Color c1, c2;
+    [SerializeField]
+    AudioClip zapClip;
+    [SerializeField]
+    GameObject explosion;
 
     // Start is called before the first frame update
     void Start()
     {
+        c1 = gasMat.GetColor("_EmissionColor");
         Cursor.visible = false;
         startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
@@ -94,8 +102,17 @@ public class ItemScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             axis = !axis;
+            if(gasMat.GetColor("_EmissionColor") == c1)
+            {
+                gasMat.SetColor("_EmissionColor", c2);
+            }
+            else
+            {
+                gasMat.SetColor("_EmissionColor", c1);
+
+            }
         }
-        if (!axis)
+        if (axis)
         {
             if (Input.GetAxisRaw("Size") > 0 && transform.localScale.x < 4.75f)
             {
@@ -161,6 +178,8 @@ public class ItemScript : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             var em = gasParticle.emission;
             em.rateOverTime = 0;
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(zapClip);
+            Instantiate(explosion, transform.position, transform.rotation);
             Destroy(this);
         }
     }

@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     float health = 5;
 
+    [SerializeField]
+    GameObject explosion;
+
     EnemyTypes playerItem;
 
     private void Awake()
@@ -53,8 +56,14 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         health -= dmg;
-        if(health <= 0)
+        if (health <= 0)
         {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Camera.main.GetComponent<CameraScript>().Restart();
+            if (FindObjectOfType<ItemScript>())
+            {
+                FindObjectOfType<ItemScript>().TakeDamage(100);
+            }
             Destroy(gameObject);
         }
     }

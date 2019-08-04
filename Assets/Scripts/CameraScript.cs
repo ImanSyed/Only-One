@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 public class CameraScript : MonoBehaviour
@@ -27,4 +28,9 @@ public class CameraScript : MonoBehaviour
         }
     }
 
+    public IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

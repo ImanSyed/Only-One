@@ -99,6 +99,12 @@ MonoBehaviour:
   snapValue: 1.25
   lockValue: 0
   gasParticle: {fileID: 4176468703861767707}
+  gasMat: {fileID: 2100000, guid: 14944d970333d314f853e53b8c446096, type: 2}
+  c1: {r: 0, g: 0, b: 0, a: 1}
+  c2: {r: 0.2924528, g: 0.1749929, b: 0, a: 1}
+  zapClip: {fileID: 8300000, guid: 98040940970e54e4487c001874fee133, type: 3}
+  explosion: {fileID: 9032396602137738058, guid: 42a19517403900244a290d23995d8df4,
+    type: 3}
 --- !u!61 &7756882385731435838
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.75, y: 2}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!1001 &7756882386725265254
 PrefabInstance:
@@ -231,7 +237,7 @@ PrefabInstance:
     - target: {fileID: 5931301484578283901, guid: abe6d4283a971584c8cfe8175b3557d6,
         type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5931301484578283901, guid: abe6d4283a971584c8cfe8175b3557d6,
         type: 3}
@@ -241,12 +247,12 @@ PrefabInstance:
     - target: {fileID: 5931301484578283901, guid: abe6d4283a971584c8cfe8175b3557d6,
         type: 3}
       propertyPath: ShapeModule.sphericalDirectionAmount
-      value: 0.001
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5931301484578283901, guid: abe6d4283a971584c8cfe8175b3557d6,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5931301484578283901, guid: abe6d4283a971584c8cfe8175b3557d6,
         type: 3}

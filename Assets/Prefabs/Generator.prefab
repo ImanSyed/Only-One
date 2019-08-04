@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   unlocked: {fileID: 21300000, guid: 4b2bcd8340b13e5468498f4803a9494e, type: 3}
+  zapClip: {fileID: 8300000, guid: 98040940970e54e4487c001874fee133, type: 3}
 --- !u!50 &3334679339849274241
 Rigidbody2D:
   serializedVersion: 4
