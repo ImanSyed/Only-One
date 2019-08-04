@@ -32,7 +32,7 @@ public class ItemScript : MonoBehaviour
 
         if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            if(Vector2.Distance(startPos, Input.mousePosition) >= 1.5f)
+            if(locked && Vector2.Distance(startPos, Input.mousePosition) >= 1.5f)
             {
                 Invoke("Unlock", lockValue);
             }
@@ -42,28 +42,28 @@ public class ItemScript : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse X") > 10000)
             {
-                transform.Translate(Vector2.right / 1.5f);
-                locked = true;
+                transform.Translate(Vector2.right / 3f);
+                //locked = true;
                 CancelInvoke();
             }
             if (Input.GetAxisRaw("Mouse X") < -10000)
             {
-                transform.Translate(Vector2.left / 1.5f);
-                locked = true;
+                transform.Translate(Vector2.left / 3f);
+                //locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") > 10000)
             {
-                transform.Translate(Vector2.up / 1.5f);
-                locked = true;
+                transform.Translate(Vector2.up / 3f);
+                //locked = true;
                 CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                transform.Translate(Vector2.down / 1.5f);
-                locked = true;
+                transform.Translate(Vector2.down / 3f);
+                //locked = true;
                 CancelInvoke();
 
             }
