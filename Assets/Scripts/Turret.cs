@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     [SerializeField] float timeDestroyed = 1.0f;
     [SerializeField] float bulletInterval = 1.0f;
     [SerializeField] float range = 6f;
+    [SerializeField] AudioClip clip;
     GameObject TempBullet;
     Rigidbody2D TempRigid;
     bool shoot;
@@ -49,6 +50,7 @@ public class Turret : MonoBehaviour
                 TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, transform.rotation);
                 TempRigid = TempBullet.GetComponent<Rigidbody2D>();
                 TempRigid.AddForce(transform.right * misslespeed);
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
                 Destroy(TempBullet, timeDestroyed);
             }
         }

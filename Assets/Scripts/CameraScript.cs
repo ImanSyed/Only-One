@@ -28,7 +28,12 @@ public class CameraScript : MonoBehaviour
         }
     }
 
-    public IEnumerator Restart()
+    public void Restart()
+    {
+        StartCoroutine(R());
+    }
+
+    public IEnumerator R()
     {
         yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

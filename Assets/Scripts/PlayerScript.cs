@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
 
+    public bool shrink;
+
     [SerializeField]
     float health = 5;
 
@@ -32,6 +34,11 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+        }
+
+        if (shrink)
+        {
+            transform.localScale = new Vector3(transform.localScale.x - 0.2f, transform.localScale.y - 0.2f, transform.localScale.z - 0.2f);
         }
     }
 
