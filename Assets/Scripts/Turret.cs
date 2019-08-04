@@ -11,30 +11,37 @@ public class Turret : MonoBehaviour
     [SerializeField]  float misslespeed = 15.0f;
     [SerializeField] float timeDestroyed = 1.0f;
     [SerializeField] float bulletInterval = 1.0f;
+    [SerializeField] float range = 6f;
     GameObject TempBullet;
     Rigidbody2D TempRigid;
-
-
-
-    // Update is called once per frame
-    void Start()
-    {
-       StartCoroutine(ShootProjectille());
-    }
+    bool shoot;
 
     private void Update()
     {
-        Vector2 targetPos = targetPlayer.position;
-        Vector2 thisPos = transform.position;
-        targetPos.x = targetPos.x - thisPos.x;
-        targetPos.y = targetPos.y - thisPos.y;
-        float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (targetPlayer && Vector2.Distance(targetPlayer.position, transform.position) < range)
+        {
+            Vector2 targetPos = targetPlayer.position;
+            Vector2 thisPos = transform.position;
+            targetPos.x = targetPos.x - thisPos.x;
+            targetPos.y = targetPos.y - thisPos.y;
+            float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            if (!shoot)
+            {
+                shoot = true;
+                StartCoroutine(ShootProjectille());
+            }
+        }
+        else if(shoot)
+        {
+            shoot = false;
+            StopCoroutine(ShootProjectille());
+        }
     }
     
     IEnumerator ShootProjectille()
     {
-        while (true)
+        while (shoot)
         {
             yield return new WaitForSeconds(bulletInterval);
             TempBullet = Instantiate(missle[UnityEngine.Random.Range(0, missle.Length)], missleEmiiter.transform.position, transform.rotation);

@@ -131,7 +131,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -150,14 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7391520f2d0b31f469d3e3fc2f5722b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 350
+  m_JumpForce: 325
   m_MovementSmoothing: 0.175
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
   m_GroundCheck: {fileID: 6799815599952010538}
-  fallMultiplier: 2.5
+  fallMultiplier: 2
   lowJumpMultiplier: 2
   OnLandEvent:
     m_PersistentCalls:
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd83480080261194082bc5cc874b4d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 30
+  runSpeed: 22
   health: 5
 --- !u!95 &1646067882
 Animator:
@@ -210,6 +210,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.19097406, y: 0.03282708}
-  m_Size: {x: 0.46404803, y: 1.1762034}
+  m_Offset: {x: 0.19097406, y: 0.054302216}
+  m_Size: {x: 0.46404803, y: 1.1332531}
   m_Direction: 0

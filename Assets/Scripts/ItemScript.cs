@@ -42,29 +42,36 @@ public class ItemScript : MonoBehaviour
         {
             if (Input.GetAxisRaw("Mouse X") > 10000)
             {
-                transform.Translate(Vector2.right / 3f);
+                transform.Translate(Vector2.right / 10f);
                 //locked = true;
-                CancelInvoke();
+                //CancelInvoke();
             }
             if (Input.GetAxisRaw("Mouse X") < -10000)
             {
-                transform.Translate(Vector2.left / 3f);
+                transform.Translate(Vector2.left / 10f);
                 //locked = true;
-                CancelInvoke();
+                //CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") > 10000)
             {
-                transform.Translate(Vector2.up / 3f);
+                transform.Translate(Vector2.up / 10f);
                 //locked = true;
-                CancelInvoke();
+                //CancelInvoke();
 
             }
             if (Input.GetAxisRaw("Mouse Y") < -10000)
             {
-                transform.Translate(Vector2.down / 3f);
+                if (transform.position.y < FindObjectOfType<PlayerScript>().gameObject.transform.position.y)
+                {
+                    transform.Translate(Vector2.down / 5f);
+                }
+                else
+                {
+                    transform.Translate(Vector2.down / 1f);
+                }
                 //locked = true;
-                CancelInvoke();
+                //CancelInvoke();
 
             }
         }

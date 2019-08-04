@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1029923500}
   - component: {fileID: 4618951627844850494}
   - component: {fileID: 1029923504}
+  - component: {fileID: 1428771905}
+  - component: {fileID: 3825497110658946515}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -143,7 +145,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -167,6 +169,35 @@ MonoBehaviour:
   infected: 0
   explosionEffect: {fileID: 2492139012350918469, guid: a6867119911cfd44fa3f9db10fa28be0,
     type: 3}
+--- !u!114 &1428771905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280119894359097372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb6f8f3699a35e42beca3e2be1edecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.25
+  target: {fileID: 0}
+  distance: 7.5
+--- !u!114 &3825497110658946515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280119894359097372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945d1547a9f611e4499da23b8e1c374f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  bullet: 0
 --- !u!1001 &2892980652545512351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 5292373531230811535, guid: 81f173b17ea6cb742b445f87ef529191,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19999981
+      value: -0.513
       objectReference: {fileID: 0}
     - target: {fileID: 5292373531230811535, guid: 81f173b17ea6cb742b445f87ef529191,
         type: 3}
@@ -247,6 +278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5292373530263863233, guid: 81f173b17ea6cb742b445f87ef529191,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f173b17ea6cb742b445f87ef529191, type: 3}

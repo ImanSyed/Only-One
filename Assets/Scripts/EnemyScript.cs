@@ -12,11 +12,14 @@ public class EnemyScript : MonoBehaviour
     {
         if(infected && GetComponent<SpriteRenderer>().color != Color.green)
         {
-            Invoke("Destroy", 2f);
             GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, Color.green, 0.01f);
             if (GetComponent<ForcefieldGenerator>())
             {
                 StartCoroutine(GetComponent<ForcefieldGenerator>().PowerDown());
+            }
+            else
+            {
+                Invoke("Destroy", 2f);
             }
         }
     }
